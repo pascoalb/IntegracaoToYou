@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Security.Principal;
@@ -109,6 +110,7 @@ namespace Backoffice.Infra.Services.Support
         public async Task<IEnumerable<Usuario>> BuscarUsuariosAsync()
         {
             var usuarios = await usuarioRepository.FindAllAsync();
+            usuarios.ToList().ForEach(u => u.LimparSenhas());
             return usuarios;
         }
 

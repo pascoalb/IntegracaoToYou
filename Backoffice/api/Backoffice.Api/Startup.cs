@@ -40,16 +40,26 @@ namespace Backoffice.Api
                     .Configure(tokenConfigurations);
             services.AddSingleton(tokenConfigurations);
             services.AddAuthJwtConfigurations(signingConfigurations, tokenConfigurations);
+            
             services.AddResponseCompression();
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", builder =>
-                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().Build());
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader().Build());
             });
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api Backoffice", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Autenticação baseada em Json Web Token (JWT)",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
             });
 
             services.AddControllers();
@@ -71,8 +81,8 @@ namespace Backoffice.Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
                 {
+                    c.RoutePrefix = "swagger";
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Backoffice");
-                    c.RoutePrefix = string.Empty;
                 });
             }
 
