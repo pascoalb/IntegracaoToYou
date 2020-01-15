@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Backoffice.Domain.Dtos;
 using Backoffice.Domain.Models;
 using Backoffice.Infra.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -37,8 +38,8 @@ namespace Backoffice.Api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("signIn")]
-        public async Task<IActionResult> LoginAsync([FromBody] Usuario usuario)
+        [HttpPost("login")]
+        public async Task<IActionResult> LoginAsync([FromBody] UsuarioAutenticacaoDto usuario)
         {
             try
             {
@@ -58,6 +59,23 @@ namespace Backoffice.Api.Controllers
             {
                 var usuarios = await usuarioService.BuscarUsuariosAsync();
                 return Ok(usuarios);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> BuscarUsuarioPorIdAsync(int id)
+        {
+            try
+            {
+                var usuario = await usuarioService.BuscarUsuarioAsync(id);
+                if (usuario == null)
+                    return NotFound();
+                
+                return Ok(usuario);
             }
             catch (Exception e)
             {

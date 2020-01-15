@@ -56,7 +56,7 @@ namespace Backoffice.Api
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,
-                    Description = "Autenticação baseada em Json Web Token (JWT)",
+                    Description = "Autenticaï¿½ï¿½o baseada em Json Web Token (JWT)",
                     Name = "Authorization",
                     Type = SecuritySchemeType.ApiKey
                 });
@@ -66,7 +66,9 @@ namespace Backoffice.Api
             services
                 .AddTransient<IConnectionFactory, ConnectionFactory>()
                 .AddTransient<IUsuarioRepository, UsuarioRepository>()
-                .AddTransient<IUsuarioService, UsuarioService>();
+                .AddTransient<IEnderecoRepository, EnderecoRepository>()
+                .AddTransient<IUsuarioService, UsuarioService>()
+                .AddTransient<IEnderecoService, EnderecoService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

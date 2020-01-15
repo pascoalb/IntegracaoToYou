@@ -13,7 +13,7 @@ namespace Backoffice.Infra.Repositories.Support
 
         public async Task<Usuario> BuscarUsuarioPorLoginAsync(string login)
         {
-            using (var connection = factory.CreateConnectionOpened())
+            using (var connection = connectionFactory.CreateConnectionOpened())
             {
                 var sql = UsuarioScripts.BuscarUsuarioPorLoginScript;
                 var result = await connection.QueryFirstOrDefaultAsync<Usuario>(sql, new { Login = login });
@@ -23,7 +23,7 @@ namespace Backoffice.Infra.Repositories.Support
 
         public async Task<Usuario> BuscarUsuarioPorLoginESenhaAsync(string login, string senha)
         {
-            using (var connection = factory.CreateConnectionOpened())
+            using (var connection = connectionFactory.CreateConnectionOpened())
             {
                 var sql = UsuarioScripts.BuscarUsuarioPorLoginESenhaScript;
                 var result = await connection.QueryFirstOrDefaultAsync<Usuario>(sql, new { Login = login, Senha = senha });

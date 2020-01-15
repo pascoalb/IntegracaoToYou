@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using Backoffice.Domain.Dtos;
 using Backoffice.Domain.Models;
 using Backoffice.Infra.Authentication;
 using Backoffice.Infra.Repositories;
@@ -17,15 +18,20 @@ namespace Backoffice.Infra.Services.Support
     {
         private readonly IUsuarioRepository usuarioRepository;
 
+        private readonly IEnderecoService enderecoService;
+
         private readonly SigningConfigurations signingConfigurations;
 
         private readonly TokenConfigurations tokenConfigurations;
 
         private readonly CryptoUtil cryptoUtil;
 
-        public UsuarioService(IUsuarioRepository usuarioRepository, SigningConfigurations signingConfigurations, TokenConfigurations tokenConfigurations)
+        public UsuarioService(IUsuarioRepository usuarioRepository, 
+            SigningConfigurations signingConfigurations, TokenConfigurations tokenConfigurations,
+            IEnderecoService enderecoService)
         {
             this.usuarioRepository = usuarioRepository;
+            this.enderecoService = enderecoService;
             this.signingConfigurations = signingConfigurations;
             this.tokenConfigurations = tokenConfigurations;
             
@@ -38,11 +44,11 @@ namespace Backoffice.Infra.Services.Support
             return usuario;
         }
 
-        public async Task<Usuario> AutenticarUsuarioAsync(Usuario usuario)
+        public async Task<Usuario> AutenticarUsuarioAsync(UsuarioAutenticacaoDto usuarioAutenticacaoDto)
         {
-            ValidarDadosLogin(usuario);
-            usuario.Senha = cryptoUtil.CriptografarSenha(usuario.Senha);
-            var usuarioResult = await BuscarUsuarioPorLoginESenhaAsync(usuario.Login, usuario.Senha);
+            ValidarDadosLogin(usuarioAutenticacaoDto);
+            usuarioAutenticacaoDto.Senha = cryptoUtil.CriptografarSenha(usuarioAutenticacaoDto.Senha);
+            var usuarioResult = await BuscarUsuarioPorLoginESenhaAsync(usuarioAutenticacaoDto.Login, usuarioAutenticacaoDto.Senha);
             if (usuarioResult == null)
                 throw new InvalidOperationException("Login/Senha inválidos ou não fornecidos.");
 
@@ -80,18 +86,24 @@ namespace Backoffice.Infra.Services.Support
             usuario.IsAutenticado = true;        
         }
 
-        private void ValidarDadosLogin(Usuario usuario)
+        private void ValidarDadosLogin(UsuarioAutenticacaoDto usuarioAutenticacaoDto)
         {
-            if (usuario == null)
+            if (usuarioAutenticacaoDto == null)
                 throw new ArgumentException("Login/Senha não informados.");
 
-            if (string.IsNullOrEmpty(usuario.Login) || string.IsNullOrEmpty(usuario.Senha))
+            if (string.IsNullOrEmpty(usuarioAutenticacaoDto.Login) || string.IsNullOrEmpty(usuarioAutenticacaoDto.Senha))
                 throw new ArgumentException("Login/Senha não informados.");
         }
 
         public async Task<Usuario> BuscarUsuarioAsync(int id)
         {
             var usuario = await usuarioRepository.FindOneAsync(new Usuario() { Id = id });
+            if (usuario != null)
+            {
+                usuario.Enderecos = await enderecoService.BuscarEnderecosPorUsuarioAsync(usuario.Id);
+                usuario.LimparSenhas();
+            }
+
             return usuario;
         }
 
@@ -110,7 +122,12 @@ namespace Backoffice.Infra.Services.Support
         public async Task<IEnumerable<Usuario>> BuscarUsuariosAsync()
         {
             var usuarios = await usuarioRepository.FindAllAsync();
-            usuarios.ToList().ForEach(u => u.LimparSenhas());
+            usuarios.ToList().ForEach(u => 
+            {
+                u.LimparSenhas();
+                u.Enderecos = enderecoService.BuscarEnderecosPorUsuarioAsync(u.Id).Result;
+            });
+            
             return usuarios;
         }
 
@@ -124,8 +141,18 @@ namespace Backoffice.Infra.Services.Support
             usuario.Senha = cryptoUtil.CriptografarSenha(usuario.Senha);
             usuario.SenhaFinanceira = cryptoUtil.CriptografarSenha(usuario.SenhaFinanceira);
             await usuarioRepository.InsertAsync(usuario);
+            await InserirEnderecosUsuarioAsync(usuario);
             usuario.LimparSenhas();
             return usuario;
+        }
+
+        private async Task InserirEnderecosUsuarioAsync(Usuario usuario)
+        {
+            foreach (var endereco in usuario.Enderecos)
+            {
+                endereco.UsuarioId = usuario.Id;
+                await enderecoService.InserirEnderecoAsync(endereco);
+            }
         }
     }
 }

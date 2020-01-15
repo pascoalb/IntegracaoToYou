@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Backoffice.Domain.Dtos;
 using Backoffice.Domain.Models;
 
 namespace Backoffice.Infra.Services
@@ -20,6 +21,6 @@ namespace Backoffice.Infra.Services
 
         Task<Usuario> BuscarUsuarioPorLoginAsync(string login);
 
-        Task<Usuario> AutenticarUsuarioAsync(Usuario usuario);
+        Task<Usuario> AutenticarUsuarioAsync(UsuarioAutenticacaoDto usuarioAutenticacaoDto);
     }
 }

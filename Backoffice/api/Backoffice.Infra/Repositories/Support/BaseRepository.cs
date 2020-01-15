@@ -7,16 +7,16 @@ namespace Backoffice.Infra.Repositories.Support
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
-        protected readonly IConnectionFactory factory;
+        protected readonly IConnectionFactory connectionFactory;
 
         public BaseRepository(IConnectionFactory connectionFactory)
         {
-            factory = connectionFactory;
+            this.connectionFactory = connectionFactory;
         }
 
         public bool Delete(TEntity entity)
         {
-            using (var connection = factory.CreateConnectionOpened())
+            using (var connection = connectionFactory.CreateConnectionOpened())
             {
                 return connection.Delete(entity);
             }
@@ -24,7 +24,7 @@ namespace Backoffice.Infra.Repositories.Support
 
         public async Task<bool> DeleteAsync(TEntity entity)
         {
-            using (var connection = factory.CreateConnectionOpened())
+            using (var connection = connectionFactory.CreateConnectionOpened())
             {
                 var transaction = connection.BeginTransaction();
                 try
@@ -43,7 +43,7 @@ namespace Backoffice.Infra.Repositories.Support
 
         public bool Exists(TEntity entity)
         {
-            using (var connection = factory.CreateConnectionOpened())
+            using (var connection = connectionFactory.CreateConnectionOpened())
             {
                 var result = connection.Get(entity);
 
@@ -53,7 +53,7 @@ namespace Backoffice.Infra.Repositories.Support
 
         public async Task<bool> ExistsAsync(TEntity entity)
         {
-            using (var connection = factory.CreateConnectionOpened())
+            using (var connection = connectionFactory.CreateConnectionOpened())
             {
                 var result = await connection.GetAsync(entity);
 
@@ -63,7 +63,7 @@ namespace Backoffice.Infra.Repositories.Support
 
         public IEnumerable<TEntity> FindAll()
         {
-            using (var connection = factory.CreateConnectionOpened())
+            using (var connection = connectionFactory.CreateConnectionOpened())
             {
                 return connection.Find<TEntity>();
             }
@@ -71,7 +71,7 @@ namespace Backoffice.Infra.Repositories.Support
 
         public async Task<IEnumerable<TEntity>> FindAllAsync()
         {
-            using (var connection = factory.CreateConnectionOpened())
+            using (var connection = connectionFactory.CreateConnectionOpened())
             {
                 return await connection.FindAsync<TEntity>();
             }
@@ -79,7 +79,7 @@ namespace Backoffice.Infra.Repositories.Support
 
         public TEntity FindOne(TEntity id)
         {
-            using (var connection = factory.CreateConnectionOpened())
+            using (var connection = connectionFactory.CreateConnectionOpened())
             {
                 return connection.Get(id);
             }
@@ -87,7 +87,7 @@ namespace Backoffice.Infra.Repositories.Support
 
         public async Task<TEntity> FindOneAsync(TEntity id)
         {
-            using (var connection = factory.CreateConnectionOpened())
+            using (var connection = connectionFactory.CreateConnectionOpened())
             {
                 return await connection.GetAsync(id);
             }
@@ -95,7 +95,7 @@ namespace Backoffice.Infra.Repositories.Support
 
         public void Insert(TEntity entity)
         {
-            using (var connection = factory.CreateConnectionOpened())
+            using (var connection = connectionFactory.CreateConnectionOpened())
             {
                 var transaction = connection.BeginTransaction();
                 try
@@ -113,7 +113,7 @@ namespace Backoffice.Infra.Repositories.Support
 
         public async Task InsertAsync(TEntity entity)
         {
-            using (var connection = factory.CreateConnectionOpened())
+            using (var connection = connectionFactory.CreateConnectionOpened())
             {
                 var transaction = connection.BeginTransaction();
                 try
@@ -131,7 +131,7 @@ namespace Backoffice.Infra.Repositories.Support
 
         public bool Update(TEntity entity)
         {
-            using (var connection = factory.CreateConnectionOpened())
+            using (var connection = connectionFactory.CreateConnectionOpened())
             {
                 var transaction = connection.BeginTransaction();
                 try
@@ -150,7 +150,7 @@ namespace Backoffice.Infra.Repositories.Support
 
         public async Task<bool> UpdateAsync(TEntity entity)
         {
-            using (var connection = factory.CreateConnectionOpened())
+            using (var connection = connectionFactory.CreateConnectionOpened())
             {
                 var transaction = connection.BeginTransaction();
                 try
