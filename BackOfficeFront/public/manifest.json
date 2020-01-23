@@ -1,0 +1,15 @@
+{
+  "short_name": "BackOffice",
+  "name": "BackOffice TouYou Social",
+  "icons": [
+    {
+      "src": "./assets/img/favicon.ico",
+      "sizes": "100x100",
+      "type": "image/ico"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

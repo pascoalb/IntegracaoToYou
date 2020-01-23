@@ -1,0 +1,12 @@
+
+.app-header.navbar {
+    background-color: #2f353a;
+}
+
+.nav-link.active {
+    color: orange !important;
+}
+
+a:hover {
+    color: orange !important;
+  }
