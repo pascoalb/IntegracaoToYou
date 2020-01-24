@@ -13,7 +13,7 @@ export default {
     },
     {
       name: 'Meus Dados',
-      url: '/users',
+      url: '/userdata',
       icon: 'icon-people',
     },
     {

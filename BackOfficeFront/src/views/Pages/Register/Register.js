@@ -6,7 +6,6 @@ import logo from '../../../assets/img/brand/logo.png'
 class Register extends Component {
 
   render() {
-    debugger
     return (
       <div className="app flex-row align-items-center">
         <Container>
