@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Badge, UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem } from 'reactstrap';
+import { UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 import { AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
@@ -30,18 +30,18 @@ class DefaultHeader extends Component {
 
         <Nav className="d-md-down-none" color="dark" navbar>
           <NavItem className="px-3">
-            <NavLink to="/dashboard" className="nav-link" >Dashboard</NavLink>
+            <NavLink to="/dashboard" className="nav-link" >Início</NavLink>
           </NavItem>
-          <NavItem className="px-3">
-            {/* <Link to="/users" className="nav-link">Users</Link> */}
+          {/* <NavItem className="px-3">
+            {/* <Link to="/users" className="nav-link">Users</Link>
             <NavLink to="/users" className="nav-link">Users</NavLink>
-          </NavItem>
-          <NavItem className="px-3">
+          </NavItem> */}
+          {/* <NavItem className="px-3">
             <NavLink to="#" className="nav-link">Settings</NavLink>
-          </NavItem>
-          <NavItem className="px-3">
+          </NavItem> */}
+          {/* <NavItem className="px-3">
             <NavLink to="/cadastro" className="nav-link">Cadastro</NavLink>
-          </NavItem>
+          </NavItem> */}
         </Nav>
         <Nav className="ml-auto" navbar>
           {/* <NavItem className="d-md-down-none">

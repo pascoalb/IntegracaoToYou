@@ -18,7 +18,7 @@ export default {
     },
     {
       name: 'Meu Plano',
-      url: '/users',
+      url: '/plans',
       icon: 'cui-briefcase',
     },
     {
@@ -26,8 +26,18 @@ export default {
       name: 'Financeiro',
     },
     {
+      name: 'Acompanhamento',
+      url: '/plans',
+      icon: 'cui-calculator',
+    },
+    {
       title: true,
-      name: 'Financeiro',
+      name: 'Rede',
+    },
+    {
+      name: 'Acompanhamento',
+      url: '/network',
+      icon: 'cui-people',
     },
     {
       title: true,
@@ -35,7 +45,7 @@ export default {
     },
     {
       name: 'Arquivos',
-      url: '/users',
+      url: '/files',
       icon: 'cui-info',
     },
     {
