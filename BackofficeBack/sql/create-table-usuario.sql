@@ -9,6 +9,7 @@ GO
 
 CREATE TABLE [USUARIO](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[ID_INDICACAO] [int] NOT NULL,
 	[NOME_COMPLETO] [varchar](100) NOT NULL,
 	[EMAIL] [varchar](100) NOT NULL,
 	[TELEFONE] [varchar](15) NULL,

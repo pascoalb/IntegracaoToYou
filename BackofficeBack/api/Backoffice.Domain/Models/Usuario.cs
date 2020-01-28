@@ -12,6 +12,8 @@ namespace Backoffice.Domain.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("ID")]
         public int Id { get; set; }
+        [Column("ID_INDICACAO")]
+        public int IdIndicacao { get; set; }
 
         [Column("NOME_COMPLETO")]
         public string NomeCompleto { get; set; }
@@ -51,6 +53,7 @@ namespace Backoffice.Domain.Models
 
         [Column("SENHA_FINANCEIRA")]
         public string SenhaFinanceira { get; set; }
+
 
         [NotMapped]
         public IEnumerable<Endereco> Enderecos { get; set; }
