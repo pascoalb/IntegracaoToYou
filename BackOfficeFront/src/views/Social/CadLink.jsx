@@ -30,10 +30,10 @@ class CadLink extends Component {
               <Button block color="primary" onClick={(e) => this.copyLink(e)}><i className="fa fa-copy" ></i> Copiar</Button>
             </Col>
             <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-              <a id="compartilharwhatslinkdeindicacao" type='button' target="_blank" rel="noopener noreferrer" className="btn btn-success btn-quirk btn-block" href="https://api.whatsapp.com/send?text=Clique%20aqui%20para%20se%20cadastrar: http://toyousocial.com/backoffice/register/meulink"><i class="fa fa-whatsapp"></i>&nbsp;Whatsapp</a>
+              <a id="compartilharwhatslinkdeindicacao" type='button' target="_blank" rel="noopener noreferrer" className="btn btn-success btn-quirk btn-block" href="https://api.whatsapp.com/send?text=Clique%20aqui%20para%20se%20cadastrar: http://toyousocial.com/backoffice/register/meulink"><i className="fa fa-whatsapp"></i>&nbsp;Whatsapp</a>
             </Col>
             <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-              <a style={{ color: 'white' }} id="compartilharwhatslinkdeindicacao2" type='button' target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-quirk btn-block" href="https://api.whatsapp.com/send?text=Clique%20aqui%20para%20se%20cadastrar: http://toyousocial.com/backoffice/register/meulink"><i class="fa fa-external-link"></i>&nbsp;Abrir</a>
+              <a style={{ color: 'white' }} id="compartilharwhatslinkdeindicacao2" type='button' target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-quirk btn-block" href="https://api.whatsapp.com/send?text=Clique%20aqui%20para%20se%20cadastrar: http://toyousocial.com/backoffice/register/meulink"><i className="fa fa-external-link"></i>&nbsp;Abrir</a>
             </Col>
           </Row>
         </CardBody>
