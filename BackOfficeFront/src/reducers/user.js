@@ -3,6 +3,8 @@ import * as UserActions from '../actions/user'
 const initialState = {
     login: [],
     data: [],
+    isValid: true,
+    indicacaoId: undefined,
     isLoading: false,
     errorMessage: undefined
 }
@@ -28,7 +30,28 @@ export default (state = initialState, action) => {
         case UserActions.POST_USER_FAILED:
             return { ...state, data: [], isLoading: false, errorMessage: action.payload.message ? JSON.parse(action.payload.message).Message : 'Falha ao cadastrar usuário!' };
 
+        case UserActions.GET_USER_VALID:
+            return { ...state, isValid: false, indicacaoId: undefined, isLoading: true, errorMessage: undefined };
+
+        case UserActions.GET_USER_VALID_SUCCESS:
+            return { ...state, indicacaoId: action.payload, isValid: true, isLoading: false, errorMessage: undefined };
+
+        case UserActions.GET_USER_VALID_FAILED:
+            debugger
+            return { ...state, isValid: false, indicacaoId: undefined, isLoading: false, errorMessage: treatErrorMessage(action.payload.message) };
+
         default:
             return { ...state }
     }
+}
+
+export function treatErrorMessage(message) {
+    if (message.includes('Failed to fetch')) {
+        return 'Falha na requisição. Contate o suporte.'
+    } else {
+        return JSON.parse(message).Message
+    }
+
+
+
 }

@@ -22,5 +22,6 @@ namespace Backoffice.Infra.Services
         Task<Usuario> BuscarUsuarioPorLoginAsync(string login);
 
         Task<Usuario> AutenticarUsuarioAsync(UsuarioAutenticacaoDto usuarioAutenticacaoDto);
+
     }
 }

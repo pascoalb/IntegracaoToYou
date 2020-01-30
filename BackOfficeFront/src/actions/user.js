@@ -41,3 +41,14 @@ export function updateUser(payload) {
         payload
     };
 }
+
+export const GET_USER_VALID = 'GET_USER_VALID';
+export const GET_USER_VALID_SUCCESS = 'GET_USER_VALID_SUCCESS';
+export const GET_USER_VALID_FAILED = 'GET_USER_VALID_FAILED';
+
+export function getUserValid(payload) {
+    return {
+        type: GET_USER_VALID,
+        payload
+    };
+}

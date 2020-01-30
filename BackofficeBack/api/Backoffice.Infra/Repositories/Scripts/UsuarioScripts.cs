@@ -10,6 +10,7 @@
                 TELEFONE Telefone,
                 CELULAR Celular,
                 DATA_NASCIMENTO DataNascimento,
+                CPF Cpf,
                 RG Rg,
                 ORGAO_EMISSOR_RG OrgaoEmissorRg,
                 SEXO Sexo,
@@ -22,5 +23,23 @@
         internal static string BuscarUsuarioPorLoginESenhaScript =>
             $@"{BuscarUsuarioPorLoginScript} 
                 AND SENHA = @Senha";
+
+        internal static string BuscarUsuarioPorCpfScript =>
+            @"SELECT 
+                ID Id,
+                NOME_COMPLETO NomeCompleto,
+                EMAIL Email,
+                TELEFONE Telefone,
+                CELULAR Celular,
+                DATA_NASCIMENTO DataNascimento,
+                CPF Cpf,
+                RG Rg,
+                ORGAO_EMISSOR_RG OrgaoEmissorRg,
+                SEXO Sexo,
+                ESTADO_CIVIL EstadoCivil,
+                NOME_MAE NomeMae,
+                LOGIN Login
+            FROM USUARIO WITH (NOLOCK)
+            WHERE LOGIN = @Cpf";
     }
 }

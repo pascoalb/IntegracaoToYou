@@ -26,7 +26,7 @@ namespace Backoffice.Infra.Services.Support
 
         private readonly CryptoUtil cryptoUtil;
 
-        public UsuarioService(IUsuarioRepository usuarioRepository, 
+        public UsuarioService(IUsuarioRepository usuarioRepository,
             SigningConfigurations signingConfigurations, TokenConfigurations tokenConfigurations,
             IEnderecoService enderecoService)
         {
@@ -34,7 +34,7 @@ namespace Backoffice.Infra.Services.Support
             this.enderecoService = enderecoService;
             this.signingConfigurations = signingConfigurations;
             this.tokenConfigurations = tokenConfigurations;
-            
+
             cryptoUtil = new CryptoUtil(SHA512.Create());
         }
 
@@ -83,7 +83,7 @@ namespace Backoffice.Infra.Services.Support
             usuario.Token = token;
             usuario.DataCriacao = dataCriacao;
             usuario.DataExpiracao = dataExpiracao;
-            usuario.IsAutenticado = true;        
+            usuario.IsAutenticado = true;
         }
 
         private void ValidarDadosLogin(UsuarioAutenticacaoDto usuarioAutenticacaoDto)
@@ -122,12 +122,12 @@ namespace Backoffice.Infra.Services.Support
         public async Task<IEnumerable<Usuario>> BuscarUsuariosAsync()
         {
             var usuarios = await usuarioRepository.FindAllAsync();
-            usuarios.ToList().ForEach(u => 
+            usuarios.ToList().ForEach(u =>
             {
                 u.LimparSenhas();
                 u.Enderecos = enderecoService.BuscarEnderecosPorUsuarioAsync(u.Id).Result;
             });
-            
+
             return usuarios;
         }
 
@@ -138,10 +138,13 @@ namespace Backoffice.Infra.Services.Support
 
         public async Task<Usuario> InserirUsuarioAsync(Usuario usuario)
         {
+            await ValidarCpfUsuarioAsync(usuario);
+            await ValidarLoginUsuarioAsync(usuario);
             usuario.Senha = cryptoUtil.CriptografarSenha(usuario.Senha);
             usuario.SenhaFinanceira = cryptoUtil.CriptografarSenha(usuario.SenhaFinanceira);
             await usuarioRepository.InsertAsync(usuario);
-            await InserirEnderecosUsuarioAsync(usuario);
+            if(usuario.Enderecos != null)
+                await InserirEnderecosUsuarioAsync(usuario);
             usuario.LimparSenhas();
             return usuario;
         }
@@ -153,6 +156,20 @@ namespace Backoffice.Infra.Services.Support
                 endereco.UsuarioId = usuario.Id;
                 await enderecoService.InserirEnderecoAsync(endereco);
             }
+        }
+
+        private async Task ValidarLoginUsuarioAsync(Usuario usuario)
+        {
+            var result = await usuarioRepository.BuscarUsuarioPorLoginAsync(usuario.Login);
+            if (result != null)
+                throw new ArgumentException("Login já cadastrado.");
+        }
+
+        private async Task ValidarCpfUsuarioAsync(Usuario usuario)
+        {
+            var result = await usuarioRepository.BuscarUsuarioPorCpfAsync(usuario.Cpf);
+            if (result != null)
+                throw new ArgumentException("CPF já cadastrado.");
         }
     }
 }

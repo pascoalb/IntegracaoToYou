@@ -33,3 +33,18 @@ function* saveUser(action) {
 export function* watchSaveUser() {
     yield takeEvery(UserActions.POST_USER, saveUser);
 }
+
+function* getUserValid(action) {
+    const param = {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+        }
+    };
+    yield fetchUrl(`${API}Usuarios/VerificarUsuario/` + action.payload, UserActions.GET_USER_VALID_SUCCESS, UserActions.GET_USER_VALID_FAILED, param);
+}
+
+export function* watchGetUserValid() {
+    yield takeEvery(UserActions.GET_USER_VALID, getUserValid);
+}

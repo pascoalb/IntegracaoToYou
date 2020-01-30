@@ -30,5 +30,15 @@ namespace Backoffice.Infra.Repositories.Support
                 return result;
             }
         }
+
+        public async Task<Usuario> BuscarUsuarioPorCpfAsync(string cpf)
+        {
+            using (var connection = connectionFactory.CreateConnectionOpened())
+            {
+                var sql = UsuarioScripts.BuscarUsuarioPorCpfScript;
+                var result = await connection.QueryFirstOrDefaultAsync<Usuario>(sql, new { Cpf = cpf });
+                return result;
+            }
+        }
     }
 }

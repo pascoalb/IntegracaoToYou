@@ -23,6 +23,23 @@ namespace Backoffice.Api.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("VerificarUsuario/{login}")]
+        public async Task<IActionResult> VerificarUsuarioAsync(string login)
+        {
+            try
+            {
+                var usuario = await usuarioService.BuscarUsuarioPorLoginAsync(login);
+                if(usuario == null)    
+                    throw new InvalidOperationException("Indicação inválida.");
+                return Ok(usuario.Id);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> CadastrarUsuarioAsync([FromBody] Usuario usuario)
         {
@@ -32,7 +49,7 @@ namespace Backoffice.Api.Controllers
                 return Created("", novoUsuario);
             }
             catch (Exception e)
-            {
+             {
                 return BadRequest(e);
             }
         }

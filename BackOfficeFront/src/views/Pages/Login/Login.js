@@ -10,10 +10,11 @@ import FontAwesome from 'react-fontawesome'
 
 class Login extends Component {
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { login } = this.props.user
     const user = nextProps.user
     if (user.login !== login && this.isValidUser(user)) {
+      
       window.location.hash = '/dashboard'
     }
   }
@@ -60,7 +61,7 @@ class Login extends Component {
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input invalid={isInvalid} type="password" placeholder="Senha" id='pass' />
-                        <div class="invalid-feedback">{user.errorMessage ? user.errorMessage : ''}</div>
+                        <div className="invalid-feedback">{user.errorMessage ? user.errorMessage : ''}</div>
                       </InputGroup>
                       <Row>
                         <Col xs="6">

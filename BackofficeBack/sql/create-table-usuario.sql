@@ -15,6 +15,7 @@ CREATE TABLE [USUARIO](
 	[TELEFONE] [varchar](15) NULL,
 	[CELULAR] [varchar](15) NULL,
 	[DATA_NASCIMENTO] [date] NOT NULL,
+	[CPF] [varchar](20) NOT NULL,
 	[RG] [varchar](20) NULL,
 	[ORGAO_EMISSOR_RG] [varchar](10) NULL,
 	[SEXO] [char](1) NULL,

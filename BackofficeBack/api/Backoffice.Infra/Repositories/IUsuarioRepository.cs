@@ -8,5 +8,6 @@ namespace Backoffice.Infra.Repositories
         Task<Usuario> BuscarUsuarioPorLoginESenhaAsync(string login, string senha);
 
         Task<Usuario> BuscarUsuarioPorLoginAsync(string login);
+        Task<Usuario> BuscarUsuarioPorCpfAsync(string cpf);
     }
 }

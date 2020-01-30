@@ -30,6 +30,9 @@ namespace Backoffice.Domain.Models
         [Column("DATA_NASCIMENTO")]
         public DateTime DataNascimento { get; set; }
 
+        [Column("CPF")]
+        public string Cpf { get; set; }
+
         [Column("RG")]
         public string Rg { get; set; }
 
