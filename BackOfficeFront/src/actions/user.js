@@ -1,4 +1,5 @@
 export const SET_LOGIN = 'LOGIN';
+export const SET_LOGOUT = 'SET_LOGOUT';
 export const SET_LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const SET_LOGIN_FAILED = 'LOGIN_FAILED';
 
@@ -6,6 +7,12 @@ export function setLogin(payload) {
     return {
         type: SET_LOGIN,
         payload
+    };
+}
+
+export function setLogout() {
+    return {
+        type: SET_LOGOUT
     };
 }
 

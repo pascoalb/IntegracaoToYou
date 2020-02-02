@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import { Button, Card, CardBody, CardFooter, CardGroup, Col, Container, Form, Input, InputGroup, InputGroupAddon, InputGroupText, Row } from 'reactstrap';
 import { AppNavbarBrand } from '@coreui/react';
 import logo from '../../../assets/img/brand/logo.png'
@@ -39,9 +39,9 @@ class Login extends Component {
       <div className="app flex-row align-items-center">
         <Container>
           <Row className="justify-content-center">
-            <Col md="8">
+            <Col md="4">
               <CardGroup>
-                <Card className="p-4">
+                <Card className="p-4" >
                   <CardBody>
                     <Form onSubmit={(e) => this.doLogin(e)}>
                       <h1>Login</h1>
@@ -71,7 +71,7 @@ class Login extends Component {
                     </Form>
                   </CardBody>
                 </Card>
-                <Card className="text-white bg-warning py-5 d-md-down-none" style={{ width: '44%' }}>
+                {/* <Card className="text-white bg-warning py-5 d-md-down-none" style={{ width: '44%' }}>
                   <CardBody className="text-center">
                     <div>
                       <h2>Não possui conta?</h2>
@@ -81,7 +81,7 @@ class Login extends Component {
                       </Link>
                     </div>
                   </CardBody>
-                </Card>
+                </Card> */}
               </CardGroup>
               <CardFooter style={{ backgroundColor: '#575a5d' }}>
                 <div className='text-center'>

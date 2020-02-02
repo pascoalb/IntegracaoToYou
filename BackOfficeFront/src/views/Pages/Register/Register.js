@@ -11,7 +11,7 @@ import { maskCPF, TestaCPF } from '../../../util';
 
 class Register extends Component {
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (this.props.match.params.id)
       this.props.action.user.getUserValid(this.props.match.params.id)
   }
@@ -20,7 +20,16 @@ class Register extends Component {
     const { data } = this.props.user
     const user = nextProps.user
     if (user.data !== data && this.isValidUser(user)) {
-      window.location.hash = '/dashboard'
+      Swal.fire({
+        icon: 'success',
+        title: 'Operação realizada com sucesso!'
+      })
+      setTimeout(() => {
+        this.props.action.user.setLogout()
+      }, 2000);
+      setTimeout(() => {
+        this.props.history.push('/login') 
+      }, 2000);
     }
   }
 

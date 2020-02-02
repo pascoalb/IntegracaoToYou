@@ -21,17 +21,17 @@ class Network extends Component {
                                     ['Name', 'Manager', 'ToolTip'],
                                     [
                                         {
-                                            v: 'Mike',
-                                            f: 'Mike<div style="color:red; font-style:italic">President</div>',
+                                            v: 'Teste',
+                                            f: 'Teste<div style="color:red; font-style:italic">President</div>',
                                         },
                                         '',
                                         'The President',
                                     ],
-                                    ['Jim', 'Mike', 'VP',],
-                                    ['Alice', 'Mike', ''],
+                                    ['Jim', 'Teste', 'VP',],
+                                    ['Alice', 'Teste', ''],
                                     ['Bob', 'Jim', 'Bob Sponge'],
                                     ['Carol', 'Bob', ''],
-                                    ['Carol2', 'Mike', '']
+                                    ['Carol2', 'Teste', '']
                                 ]}
                                 options={{
                                     allowHtml: true,

@@ -35,7 +35,7 @@ export default {
       name: 'Rede',
     },
     {
-      name: 'Acompanhamento',
+      name: 'Minha Rede',
       url: '/network',
       icon: 'cui-people',
     },

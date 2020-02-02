@@ -80,10 +80,13 @@ namespace Backoffice.Infra.Services.Support
             });
 
             var token = handler.WriteToken(securityToken);
-            usuario.Token = token;
-            usuario.DataCriacao = dataCriacao;
-            usuario.DataExpiracao = dataExpiracao;
-            usuario.IsAutenticado = true;
+            usuario.LoginData = new LoginData
+            {
+                Token = token,
+                DataCriacao = dataCriacao,
+                DataExpiracao = dataExpiracao,
+                IsAutenticado = true
+            };
         }
 
         private void ValidarDadosLogin(UsuarioAutenticacaoDto usuarioAutenticacaoDto)
@@ -138,8 +141,8 @@ namespace Backoffice.Infra.Services.Support
 
         public async Task<Usuario> InserirUsuarioAsync(Usuario usuario)
         {
-            await ValidarCpfUsuarioAsync(usuario);
-            await ValidarLoginUsuarioAsync(usuario);
+            //await ValidarCpfUsuarioAsync(usuario);
+            //await ValidarLoginUsuarioAsync(usuario);
             usuario.Senha = cryptoUtil.CriptografarSenha(usuario.Senha);
             usuario.SenhaFinanceira = cryptoUtil.CriptografarSenha(usuario.SenhaFinanceira);
             await usuarioRepository.InsertAsync(usuario);

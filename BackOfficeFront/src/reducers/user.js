@@ -1,7 +1,7 @@
 import * as UserActions from '../actions/user'
 
 const initialState = {
-    login: [],
+    login: undefined,
     data: [],
     isValid: true,
     indicacaoId: undefined,
@@ -13,13 +13,13 @@ export default (state = initialState, action) => {
     switch (action.type) {
 
         case UserActions.SET_LOGIN:
-            return { ...state, login: [], isLoading: true, errorMessage: undefined }
+            return { ...state, login: undefined, isLoading: true, errorMessage: undefined }
 
         case UserActions.SET_LOGIN_SUCCESS:
-            return { ...state, login: action.payload, isLoading: false, errorMessage: undefined };
+            return { ...state, data: { ...action.payload, loginData: undefined }, login: action.payload.loginData, isLoading: false, errorMessage: undefined };
 
         case UserActions.SET_LOGIN_FAILED:
-            return { ...state, login: [], isLoading: false, errorMessage: action.payload.message ? JSON.parse(action.payload.message).Message : 'Falha ao efetuar Login!' };
+            return { ...state, login: undefined, isLoading: false, errorMessage: action.payload.message ? JSON.parse(action.payload.message).Message : 'Falha ao efetuar Login!' };
 
         case UserActions.POST_USER:
             return { ...state, data: [], isLoading: true, errorMessage: undefined }
@@ -37,8 +37,10 @@ export default (state = initialState, action) => {
             return { ...state, indicacaoId: action.payload, isValid: true, isLoading: false, errorMessage: undefined };
 
         case UserActions.GET_USER_VALID_FAILED:
-            debugger
             return { ...state, isValid: false, indicacaoId: undefined, isLoading: false, errorMessage: treatErrorMessage(action.payload.message) };
+
+        case UserActions.SET_LOGOUT:
+            return { ...initialState }
 
         default:
             return { ...state }

@@ -62,16 +62,7 @@ namespace Backoffice.Domain.Models
         public IEnumerable<Endereco> Enderecos { get; set; }
 
         [NotMapped]
-        public string Token { get; set; }
-
-        [NotMapped]
-        public DateTime? DataCriacao { get; set; }
-
-        [NotMapped]
-        public DateTime? DataExpiracao { get; set; }
-
-        [NotMapped]
-        public bool IsAutenticado { get; set; }
+        public LoginData LoginData { get; set; }
 
         public void LimparSenhas()
         {

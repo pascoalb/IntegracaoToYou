@@ -2,7 +2,7 @@ import { put } from 'redux-saga/effects';
 import fetch from 'isomorphic-fetch';
 
 export const API = process.env.REACT_APP_URL_API;
-
+export const URL_REGISTER = process.env.REACT_APP_URL_REGISTER_BACKOFFICE
 /**
  * Função para remover caracteres especiais não válidos para mensagem SMS
  * 
