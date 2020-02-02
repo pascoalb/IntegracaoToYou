@@ -28,7 +28,7 @@ class Register extends Component {
         this.props.action.user.setLogout()
       }, 2000);
       setTimeout(() => {
-        this.props.history.push('/login') 
+        this.props.history.push('/login')
       }, 2000);
     }
   }
@@ -50,15 +50,13 @@ class Register extends Component {
     elements.forEach(e => {
       user[e.id] = e.value
     });
-
-    user.idIndicacao = 1234 //this.props.user.indicacaoId
+    user.idIndicacao = this.props.user.indicacaoId
 
     if (this.validateUser(user))
       this.props.action.user.saveUser(user)
   }
 
   validateUser(user) {
-    debugger
     Object.keys(user).forEach(key => {
       if (user[key] === '') {
         Swal.fire({
@@ -69,7 +67,7 @@ class Register extends Component {
       }
     });
 
-    if(TestaCPF(user.cpf)){
+    if (TestaCPF(user.cpf)) {
       Swal.fire({
         icon: 'warning',
         title: 'CPF inválido!'
@@ -77,7 +75,7 @@ class Register extends Component {
       return false
     }
 
-    if(user.senha !== user.repeatSenha){
+    if (user.senha !== user.repeatSenha) {
       Swal.fire({
         icon: 'warning',
         title: 'Confirmaçõa de senha difere da senha informada!'
@@ -160,7 +158,11 @@ class Register extends Component {
                             <i className="icon-people"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="text" id='sexo' placeholder="Sexo" />
+                        <Input type="select" id='sexo' placeholder="Sexo">
+                          <option>Sexo</option>
+                          <option value='M'>M</option>
+                          <option value='F'>F</option>
+                        </Input>
                       </InputGroup>
                     </Row>
 
@@ -184,7 +186,7 @@ class Register extends Component {
                     </Row>
 
                     <Row style={{ marginBottom: '15px' }}>
-                    <InputGroup className="col-md-6">
+                      <InputGroup className="col-md-6">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
                             <i className="icon-doc"></i>
@@ -198,7 +200,13 @@ class Register extends Component {
                             <i className="icon-options"></i>
                           </InputGroupText>
                         </InputGroupAddon>
-                        <Input type="text" id='estadoCivil' placeholder="Estado Civil" />
+                        <Input type="select" id='estadoCivil' placeholder="Estado Civil">
+                          <option>Estado Civil</option>
+                          <option value='S'>Solteiro(a)</option>
+                          <option value='C'>Casado(a)</option>
+                          <option value='UE'>União Estável</option>
+                          <option value='D'>Divorciado(a)</option>
+                        </Input>
                       </InputGroup>
                     </Row>
 
@@ -251,8 +259,7 @@ class Register extends Component {
                       </InputGroupAddon>
                       <Input type="password" id='repeatSenhaFinanceira' placeholder="Repetir Senha Financeira" />
                     </InputGroup>
-                    {/* <Button color="success" type='submit' block disabled={!user.isValid}>Criar Conta</Button> */}
-                    <Button color="success" type='submit' id='submit' block value='Criar Conta' >Criar Conta</Button>
+                    <Button color="success" type='submit' block disabled={!user.isValid}>Criar Conta</Button>
                   </Form>
                 </CardBody>
                 <CardFooter style={{ backgroundColor: '#575a5d' }}>

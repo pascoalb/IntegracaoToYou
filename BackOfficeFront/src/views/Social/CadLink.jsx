@@ -5,9 +5,7 @@ import { URL_REGISTER } from '../../util';
 
 class CadLink extends Component {
 
-
   copyLink(e) {
-    debugger
     e.preventDefault();
     navigator.clipboard.writeText(this.refs.textlink.props.defaultValue);
   }

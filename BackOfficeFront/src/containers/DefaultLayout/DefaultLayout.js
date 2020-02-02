@@ -2,8 +2,10 @@ import React, { Component, Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import * as router from 'react-router-dom';
 import { Container } from 'reactstrap';
-
+import { connect } from 'react-redux';
 import DevTools from '../DevTools'
+import { bindActionCreators } from 'redux';
+import * as ActionCreatorUser from '../../actions/user'
 
 import {
   AppAside,
@@ -28,11 +30,24 @@ const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 
 class DefaultLayout extends Component {
 
+  UNSAFE_componentWillMount() {
+    const { login } = this.props.user
+
+    if (login && login.isAutenticado) {
+      this.props.history.push('/dashboard')
+    }
+    else {
+      this.props.action.user.setLogout()
+      this.props.history.push('/login')
+    }
+  }
+
   loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
 
   signOut(e) {
     e.preventDefault()
-    this.props.history.push('/login') 
+    this.props.action.user.setLogout()
+    this.props.history.push('/login')
   }
 
   render() {
@@ -70,7 +85,7 @@ class DefaultLayout extends Component {
                         )} />
                     ) : (null);
                   })}
-                  <Redirect from="/" to="/dashboard" />
+                  <Redirect from="/" to="/login" />
                 </Switch>
               </Suspense>
             </Container>
@@ -92,4 +107,10 @@ class DefaultLayout extends Component {
   }
 }
 
-export default DefaultLayout;
+const select = (state) => ({
+  user: state.reducers.user
+});
+
+const mapDispatchToProps = (dispatch) => ({ action: { user: bindActionCreators(ActionCreatorUser, dispatch) } });
+
+export default connect(select, mapDispatchToProps)(DefaultLayout);
