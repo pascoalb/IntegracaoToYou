@@ -17,7 +17,7 @@
                 ESTADO_CIVIL EstadoCivil,
                 NOME_MAE NomeMae,
                 LOGIN Login
-            FROM USUARIO WITH (NOLOCK)
+            FROM USUARIO
             WHERE LOGIN = @Login";
 
         internal static string BuscarUsuarioPorLoginESenhaScript =>
@@ -39,7 +39,7 @@
                 ESTADO_CIVIL EstadoCivil,
                 NOME_MAE NomeMae,
                 LOGIN Login
-            FROM USUARIO WITH (NOLOCK)
+            FROM USUARIO
             WHERE LOGIN = @Cpf";
     }
 }

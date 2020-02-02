@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using Dapper.FastCrud;
 using Microsoft.Extensions.Configuration;
+using MySql.Data.MySqlClient;
 
 namespace Backoffice.Infra.Repositories.Support
 {
@@ -12,16 +13,16 @@ namespace Backoffice.Infra.Repositories.Support
         public ConnectionFactory(IConfiguration configuration)
         {
             this.configuration = configuration;
-            OrmConfiguration.DefaultDialect = SqlDialect.MsSql;
+            OrmConfiguration.DefaultDialect = SqlDialect.MySql;
         }
 
         public IDbConnection CreateConnectionOpened()
         {
-            var connection = new SqlConnection(ConnectionString);
+            var connection = new MySqlConnection(ConnectionString);
             connection.Open();
             return connection;
         }
 
-        public string ConnectionString => configuration.GetConnectionString("MsSqlConnection");
+        public string ConnectionString => configuration.GetConnectionString("SqlConnection");
     }
 }

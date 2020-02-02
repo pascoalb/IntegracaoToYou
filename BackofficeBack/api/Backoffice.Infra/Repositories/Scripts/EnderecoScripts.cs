@@ -15,7 +15,7 @@ namespace Backoffice.Infra.Repositories.Scripts
                     CIDADE Cidade,
                     ESTADO Estado,
                     PAIS Pais
-                FROM ENDERECO (NOLOCK)
+                FROM ENDERECO
                 WHERE ID_USUARIO = @UsuarioId
             ";
     }
