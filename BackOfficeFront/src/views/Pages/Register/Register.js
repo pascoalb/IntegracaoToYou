@@ -103,7 +103,7 @@ class Register extends Component {
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
-                          Indicação
+                          Patrocinador
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input type="text" id='idIndicacao' invalid={!user.isValid} disabled defaultValue={this.props.match.params.id} />

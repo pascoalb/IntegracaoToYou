@@ -30,8 +30,8 @@ export default {
       name: 'Financeiro',
     },
     {
-      name: 'Acompanhamento',
-      url: '/plans',
+      name: 'Pagamentos',
+      url: '/payments',
       icon: 'cui-calculator',
       badge: {
         variant: 'warning',

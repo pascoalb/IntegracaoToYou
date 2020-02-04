@@ -20,7 +20,7 @@ class UserData extends Component {
                   {/* <InputGroup className="mb-3">
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
-                        Indicação
+                        Patrocinador
                         </InputGroupText>
                     </InputGroupAddon>
                     <Input type="text" placeholder="Username" autoComplete="username" disabled defaultValue={this.props.match.params.id} />

@@ -7,14 +7,17 @@ class Plans extends Component {
         return (
             <div className="animated fadeIn">
                 <Row>
-                    <Col style={{cursor: 'pointer'}} sm="12" md="4">
-                        <Plan icon="icon-chart" color="info" header="Plano 1" value="30" active>Iniciante</Plan>
+                    <Col style={{cursor: 'pointer'}} sm="12" md="3">
+                        <Plan icon="icon-chart" color="info" header="FREE" value="100" active>Plano 1</Plan>
                     </Col>
-                    <Col style={{cursor: 'pointer'}} sm="12" md="4">
-                        <Plan icon="icon-chart" color="success" header="Plano 2" value="0">Pleno</Plan>
+                    <Col style={{cursor: 'pointer'}} sm="12" md="3">
+                        <Plan icon="icon-chart" color="success" header="START" value="0">Plano 2</Plan>
                     </Col>
-                    <Col style={{cursor: 'pointer'}} sm="12" md="4">
-                        <Plan icon="icon-chart" color="warning" header="Plano 3" value="0">Sênior</Plan>
+                    <Col style={{cursor: 'pointer'}} sm="12" md="3">
+                        <Plan icon="icon-chart" color="warning" header="PREMIUM" value="0">Plano 3</Plan>
+                    </Col>
+                    <Col style={{cursor: 'pointer'}} sm="12" md="3">
+                        <Plan icon="icon-chart" color="warning" header="TOP" value="0">Plano 4</Plan>
                     </Col>
                 </Row>
             </div>
