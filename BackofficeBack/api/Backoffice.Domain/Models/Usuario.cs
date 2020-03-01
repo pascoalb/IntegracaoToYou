@@ -57,6 +57,9 @@ namespace Backoffice.Domain.Models
         [Column("SENHA_FINANCEIRA")]
         public string SenhaFinanceira { get; set; }
 
+        [Column("ID_PLANO")]
+        public string IdPlano { get; set; }
+
 
         [NotMapped]
         public IEnumerable<Endereco> Enderecos { get; set; }

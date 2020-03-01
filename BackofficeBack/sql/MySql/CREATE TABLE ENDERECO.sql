@@ -1,11 +1,4 @@
-USE `backoffice`;
- 
-
-/* SET ANSI_NULLS ON */
- 
-
-/* SET QUOTED_IDENTIFIER ON */
- 
+USE `backoffice`; 
 
 CREATE TABLE ENDERECO (
     `ID` INT AUTO_INCREMENT NOT NULL,
