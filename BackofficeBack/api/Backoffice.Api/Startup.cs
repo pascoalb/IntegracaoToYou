@@ -68,7 +68,12 @@ namespace Backoffice.Api
                 .AddTransient<IUsuarioRepository, UsuarioRepository>()
                 .AddTransient<IEnderecoRepository, EnderecoRepository>()
                 .AddTransient<IUsuarioService, UsuarioService>()
-                .AddTransient<IEnderecoService, EnderecoService>();
+                .AddTransient<IEnderecoService, EnderecoService>()
+                .AddTransient<IPlanosService, PlanosSevice>()
+                .AddTransient<IPlanosRepository, PlanosRepository>()
+                .AddTransient<IBonusService, BonusService>()
+                .AddTransient<IBonusDiretoRepository, BonusDiretoRepository>()
+                .AddTransient<IBonusIndiretoRepository, BonusIndiretoRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

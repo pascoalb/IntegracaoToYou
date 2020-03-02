@@ -6,7 +6,6 @@ namespace Backoffice.Domain.Models
 {
     public class Rede
     {
-        public int IdUsuario { get; set; }
-        public int Geracao { get; set; }
+        public List<Usuario> ListaRede { get; set; }
     }
 }

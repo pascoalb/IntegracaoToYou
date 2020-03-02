@@ -16,6 +16,7 @@ export default (state = initialState, action) => {
             return { ...state, login: undefined, isLoading: true, errorMessage: undefined }
 
         case UserActions.SET_LOGIN_SUCCESS:
+          sessionStorage.setItem('token', action.payload.loginData.token)
             return { ...state, data: { ...action.payload, loginData: undefined }, login: action.payload.loginData, isLoading: false, errorMessage: undefined };
 
         case UserActions.SET_LOGIN_FAILED:

@@ -23,5 +23,9 @@ namespace Backoffice.Infra.Services
 
         Task<Usuario> AutenticarUsuarioAsync(UsuarioAutenticacaoDto usuarioAutenticacaoDto);
 
+        Task<List<Usuario>> BuscarRedeUsuarioAsync(int geracao, int usuarioId);
+
+        Task<string> CriptografarSenha(string senha);
+
     }
 }

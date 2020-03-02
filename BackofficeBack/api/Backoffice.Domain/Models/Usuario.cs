@@ -72,5 +72,8 @@ namespace Backoffice.Domain.Models
             Senha = null;
             SenhaFinanceira = null;
         }
+
+        [NotMapped]
+        public int Geracao { get; set; }
     }
 }

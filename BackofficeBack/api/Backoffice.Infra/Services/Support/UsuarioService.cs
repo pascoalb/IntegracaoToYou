@@ -141,8 +141,8 @@ namespace Backoffice.Infra.Services.Support
 
         public async Task<Usuario> InserirUsuarioAsync(Usuario usuario)
         {
-            //await ValidarCpfUsuarioAsync(usuario);
-            //await ValidarLoginUsuarioAsync(usuario);
+            await ValidarCpfUsuarioAsync(usuario);
+            await ValidarLoginUsuarioAsync(usuario);
             usuario.Senha = cryptoUtil.CriptografarSenha(usuario.Senha);
             usuario.SenhaFinanceira = cryptoUtil.CriptografarSenha(usuario.SenhaFinanceira);
             await usuarioRepository.InsertAsync(usuario);
@@ -173,6 +173,17 @@ namespace Backoffice.Infra.Services.Support
             var result = await usuarioRepository.BuscarUsuarioPorCpfAsync(usuario.Cpf);
             if (result != null)
                 throw new ArgumentException("CPF já cadastrado.");
+        }
+
+        public async Task<List<Usuario>> BuscarRedeUsuarioAsync(int geracao, int usuarioId)
+        {
+            var result = await usuarioRepository.BuscarRedeUsuarioAsync(geracao, usuarioId);
+            return result;
+        }
+
+        public async Task<string> CriptografarSenha(string senha)
+        {
+            return cryptoUtil.CriptografarSenha(senha);
         }
     }
 }

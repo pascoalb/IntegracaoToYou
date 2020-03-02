@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Backoffice.Domain.Models;
 using Backoffice.Infra.Repositories.Scripts;
 using Dapper;
@@ -38,6 +39,16 @@ namespace Backoffice.Infra.Repositories.Support
                 var sql = UsuarioScripts.BuscarUsuarioPorCpfScript;
                 var result = await connection.QueryFirstOrDefaultAsync<Usuario>(sql, new { Cpf = cpf });
                 return result;
+            }
+        }
+
+        public async Task<List<Usuario>> BuscarRedeUsuarioAsync(int geracao, int usuarioId)
+        {
+            using (var connection = connectionFactory.CreateConnectionOpened())
+            {
+                var sql = RedeScript.BuscarRedePorIdeGeracao;
+                var result = await connection.QueryAsync<Usuario>(sql, new { GERACAO = geracao, IDUSUARIO = usuarioId });
+                return result.AsList();
             }
         }
     }

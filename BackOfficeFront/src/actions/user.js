@@ -59,3 +59,14 @@ export function getUserValid(payload) {
         payload
     };
 }
+
+export const GET_USER_PLANS = 'GET_USER_PLANS';
+export const GET_USER_PLANS_SUCCESS = 'GET_USER_PLANS_SUCCESS';
+export const GET_USER_PLANS_FAILED = 'GET_USER_PLANS_FAILED';
+
+export function getUserPlans(payload) {
+    return {
+        type: GET_USER_PLANS,
+        payload
+    };
+}

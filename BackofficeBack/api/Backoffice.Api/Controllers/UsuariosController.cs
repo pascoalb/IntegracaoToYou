@@ -99,5 +99,35 @@ namespace Backoffice.Api.Controllers
                 return BadRequest(e);
             }
         }
+
+        [AllowAnonymous]
+        [HttpGet("BuscarRedeUsuario/{geracao}/{usuarioId}")]
+        public async Task<IActionResult> BuscarRedeUsuarioAsync(int geracao, int usuarioId)
+        {
+            try
+            {
+                var usuarios = await usuarioService.BuscarRedeUsuarioAsync(geracao, usuarioId);
+                return Ok(usuarios);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpGet("CriptografarSenha/{senha}")]
+        public async Task<IActionResult> CriptografarSenha(string senha)
+        {
+            try
+            {
+                var result = await usuarioService.CriptografarSenha(senha);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
     }
 }
